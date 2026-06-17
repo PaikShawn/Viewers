@@ -2,7 +2,7 @@ packages:
   - platform/*
   - extensions/*
   - modes/*
-  - 'extensions/recist-assessment-tools'
+  - extensions/recist-assessment-tools
   
 # Mirror the cornerstone3D pnpm setup (libs/@cornerstonejs) which is known-good.
 nodeLinker: hoisted
