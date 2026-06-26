@@ -65,7 +65,8 @@
     "cs3d:unlink": "node libs/@cornerstonejs/scripts/unlink-ohif-cornerstone-node-modules.mjs ."
   },
   "dependencies": {
-    "execa": "8.0.1"
+    "execa": "8.0.1",
+    "ohif-extension-ai": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "7.29.7",

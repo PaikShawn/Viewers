@@ -15,10 +15,10 @@ export const tracked = {
   measurements: '@ohif/extension-measurement-tracking.panelModule.trackedMeasurements',
   thumbnailList: '@ohif/extension-measurement-tracking.panelModule.seriesList',
   viewport: '@ohif/extension-measurement-tracking.viewportModule.cornerstone-tracked',
+  aiPanel: 'ohif-extension-ai.panelModule.AIPanel',
 };
 
 export const extensionDependencies = {
-  // Can derive the versions at least process.env.from npm_package_version
   ...basicDependencies,
   '@ohif/extension-measurement-tracking': '^3.0.0',
 };
@@ -29,41 +29,32 @@ export const longitudinalInstance = {
   props: {
     ...basicLayout.props,
     leftPanels: [tracked.thumbnailList],
-    rightPanels: [cornerstone.segmentation, tracked.measurements],
+    rightPanels: [tracked.aiPanel, cornerstone.segmentation, tracked.measurements],
     viewports: [
       {
         namespace: tracked.viewport,
-        // Re-use the display sets from basic
         displaySetsToDisplay: basicLayout.props.viewports[0].displaySetsToDisplay,
       },
-      ...basicLayout.props.viewports,
-      ],
-    }
-  };
+    ],
+  }
+};
 
-
-export const longitudinalRoute =
-    {
-      ...basicRoute,
-      path: 'longitudinal',
-        /*init: ({ servicesManager, extensionManager }) => {
-          //defaultViewerRouteInit
-        },*/
-      layoutInstance: longitudinalInstance,
-    };
+export const longitudinalRoute = {
+  ...basicRoute,
+  path: 'longitudinal',
+  layoutInstance: longitudinalInstance,
+};
 
 export const modeInstance = {
-    ...basicModeInstance,
-    // TODO: We're using this as a route segment
-    // We should not be.
-    id,
-    routeName: 'viewer',
-    displayName: i18n.t('Modes:Basic Viewer'),
-    routes: [
-      longitudinalRoute
-    ],
-    extensions: extensionDependencies,
-  };
+  ...basicModeInstance,
+  id,
+  routeName: 'viewer',
+  displayName: i18n.t('Modes:Basic Viewer'),
+  routes: [
+    longitudinalRoute
+  ],
+  extensions: extensionDependencies,
+};
 
 const mode = {
   ...basicMode,

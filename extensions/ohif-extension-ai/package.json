@@ -1,0 +1,9 @@
+{
+  "name": "ohif-extension-ai",
+  "version": "1.0.0",
+  "description": "AI lesion detection and RECIST analysis panel",
+  "main": "src/index.js",
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
+}
