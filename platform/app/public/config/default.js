@@ -16,9 +16,9 @@ window.config = {
   groupEnabledModesFirst: true,
   allowMultiSelectExport: false,
   maxNumRequests: {
-  interaction: 100,
-  thumbnail: 5,
-  prefetch: 1,
+    interaction: 100,
+    thumbnail: 5,
+    prefetch: 1,
   },
   showErrorDetails: 'always',
   multimonitor: [
@@ -233,5 +233,26 @@ window.config = {
   httpErrorHandler: error => {
     console.warn(error.status);
     console.warn('test, navigate to https://ohif.org/');
+  },
+  onConfiguration: () => {
+    const tryIntercept = () => {
+      const studyList = document.querySelector('[data-cy="study-list-results"]');
+      if (!studyList) {
+        setTimeout(tryIntercept, 500);
+        return;
+      }
+      studyList.addEventListener('click', (e) => {
+        const row = e.target.closest('tr');
+        if (!row) return;
+        const uid = row.getAttribute('data-cy-study-instance-uid') ||
+                    row.getAttribute('data-study-instance-uid');
+        if (!uid) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const url = `${window.location.origin}/viewer?StudyInstanceUIDs=${uid}`;
+        window.open(url, `viewer_${uid}`, 'width=1400,height=900,resizable=yes');
+      }, true);
+    };
+    setTimeout(tryIntercept, 1000);
   },
 };

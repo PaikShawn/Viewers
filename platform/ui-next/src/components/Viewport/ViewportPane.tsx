@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useDrop } from 'react-dnd';
 
-/**
- * The "pane" that encloses a Cornerstone or other type of Viewport. This handles
- * drag-and-drop for display sets, activation on click, etc.
- */
 function ViewportPane({
   children,
   className,
@@ -65,7 +61,6 @@ function ViewportPane({
     >
       <div className={classNames('relative h-full w-full', className)}>{children}</div>
 
-      {/* Border overlay */}
       <div
         className={classNames('pointer-events-none absolute inset-0 rounded-md border', {
           'border-highlight': isActive,
